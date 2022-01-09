@@ -103,6 +103,22 @@ const controller = {
       res.status(400).send(errors);
     }
   },
+
+  deleteTeacherById: async (req, res) => {
+    TeacherDb.findByPk(req.params.id)
+      .then((teacher) => {
+        if (teacher) {
+          teacher.destroy();
+          res.status(202).send({ message: "deleted" });
+        } else {
+          res.status(404).send({ message: "Teacher not found!" });
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+        res.status(500).send({ message: "Server error!" });
+      });
+  },
 };
 
 module.exports = controller;

@@ -92,6 +92,22 @@ const controller = {
         res.status(500).send({ message: "Server error!" });
       });
   },
+
+  deletePartialDeliverableById: async (req, res) => {
+    PartialDeliverableDb.findByPk(req.params.id)
+      .then((partialDeliverable) => {
+        if (partialDeliverable) {
+          partialDeliverable.destroy();
+          res.status(202).send({ message: "deleted" });
+        } else {
+          res.status(404).send({ message: "Partial Deliverable not found!" });
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+        res.status(500).send({ message: "Server error!" });
+      });
+  },
 };
 
 module.exports = controller;
