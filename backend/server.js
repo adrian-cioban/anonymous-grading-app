@@ -1,5 +1,6 @@
 const express = require("express");
 const connection = require("./models").connection;
+const router = require("./routes");
 
 const app = express();
 
@@ -7,6 +8,8 @@ app.use(express.urlencoded({ extended: true })); // bodyparser integrat in node.
 app.use(express.json());
 
 let port = 8080;
+
+app.use("/api", router);
 
 app.get("/reset", (req, res) => {
   connection
@@ -17,7 +20,8 @@ app.get("/reset", (req, res) => {
       console.log("Database reset");
       res.status(201).send({ message: "Database reset" });
     })
-    .catch(() => {
+    .catch((error) => {
+      console.log(error);
       res.status(500).send({ message: "Database reset failed" });
     });
 });

@@ -14,11 +14,11 @@ const PartialDeliverable = PartialDeliverableModel(db, Sequelize);
 const Grade = GradeModel(db, Sequelize);
 
 // Relatii tabele
-Teacher.hasMany(Student, {
-  foreignKey: "teacherId",
-  as: "Student",
-});
-Student.belongsTo(Teacher);
+// Teacher.hasMany(Student, {
+//   foreignKey: "teacherId",
+//   as: "Student",
+// });
+// Student.belongsTo(Teacher);
 
 Student.hasMany(Project, {
   foreignKey: "studentId",
