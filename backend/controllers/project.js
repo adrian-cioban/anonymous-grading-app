@@ -43,6 +43,21 @@ const controller = {
         res.status(500).send({ message: "Server error!" });
       });
   },
+
+  getProjectById: async (req, res) => {
+    ProjectDb.findByPk(req.params.id)
+      .then((project) => {
+        if (project) {
+          res.status(201).send(project);
+        } else {
+          res.status(404).send({ message: "Project not found!" });
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+        res.status(500).send({ message: "Server error!" });
+      });
+  },
 };
 
 module.exports = controller;

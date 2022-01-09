@@ -47,6 +47,21 @@ const controller = {
         res.status(500).send({ message: "Server error!" });
       });
   },
+
+  getPartialDeliverableById: async (req, res) => {
+    PartialDeliverableDb.findByPk(req.params.id)
+      .then((partialDeliverable) => {
+        if (partialDeliverable) {
+          res.status(201).send(partialDeliverable);
+        } else {
+          res.status(404).send({ message: "Partial Deliverable not found!" });
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+        res.status(500).send({ message: "Server error!" });
+      });
+  },
 };
 
 module.exports = controller;

@@ -52,6 +52,21 @@ const controller = {
       res.status(400).send(errors);
     }
   },
+
+  getTeacherById: async (req, res) => {
+    TeacherDb.findByPk(req.params.id)
+      .then((teacher) => {
+        if (teacher) {
+          res.status(201).send(teacher);
+        } else {
+          res.status(404).send({ message: "Teacher not found!" });
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+        res.status(500).send({ message: "Server error!" });
+      });
+  },
 };
 
 module.exports = controller;

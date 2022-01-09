@@ -4,6 +4,7 @@ const partialDeliverableController =
   require("../controllers").partialDeliverable;
 
 router.get("/", partialDeliverableController.getAllPartialDeliverables);
+router.get("/:id", partialDeliverableController.getPartialDeliverableById);
 router.post("/", partialDeliverableController.addPartialDeliverable);
 
 module.exports = router;
