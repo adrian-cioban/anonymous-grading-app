@@ -58,6 +58,32 @@ const controller = {
         res.status(500).send({ message: "Server error!" });
       });
   },
+
+  updateGradeById: async (req, res) => {
+    GradeDb.findByPk(req.params.id)
+      .then((updatedGrade) => {
+        if (updatedGrade) {
+          ProjectDb.findByPk(req.body.projectId).then((project) => {
+            if (project) {
+              if (req.body.grade) {
+                updatedGrade.update(req.body);
+                res.status(202).send(updatedGrade);
+              } else {
+                res.status(400).send({ message: "No grade entered!" });
+              }
+            } else {
+              res.status(404).send({ message: "Project not found!" });
+            }
+          });
+        } else {
+          res.status(404).send({ message: "Grade not found!" });
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+        res.status(500).send({ message: "Server error!" });
+      });
+  },
 };
 
 module.exports = controller;
