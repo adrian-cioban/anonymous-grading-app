@@ -119,6 +119,172 @@ const controller = {
         res.status(500).send({ message: "Server error!" });
       });
   },
+
+  getProjectsFromStudent: async (req, res) => {
+    const { id } = req.params;
+    if (!id) {
+      res.status(400).send({ message: "ID not provided" });
+    }
+
+    StudentDb.findByPk(id, {
+      include: [{ model: ProjectDb, as: "Project" }],
+    })
+      .then((student) => {
+        if (student) {
+          res.status(200).send(student);
+        } else {
+          res.status(404).send({ message: "Student not found!" });
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+        res.status(500).send({ message: "Server error!" });
+      });
+  },
+
+  getProjectByIdFromStudent: async (req, res) => {
+    const { sid, pid } = req.params;
+    if (!sid) {
+      res.status(400).send({ message: "Student ID not provided" });
+    }
+    if (!pid) {
+      res.status(400).send({ message: "Project ID not provided" });
+    }
+
+    StudentDb.findByPk(sid)
+      .then((student) => {
+        if (student) {
+          ProjectDb.findOne({
+            where: {
+              id: pid,
+              studentId: sid,
+            },
+          }).then((proiect) => {
+            if (proiect) {
+              res.status(200).send(proiect);
+            } else {
+              res.status(404).send({ message: "Project not found!" });
+            }
+          });
+        } else {
+          res.status(404).send({ message: "Student not found!" });
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+        res.status(500).send({ message: "Server error!" });
+      });
+  },
+
+  addProjectToStudent: async (req, res) => {
+    const { titlu } = req.body;
+    const { id } = req.params;
+    if (!id) {
+      res.status(400).send({ message: "Student ID not provided" });
+    }
+
+    StudentDb.findByPk(id)
+      .then((student) => {
+        if (student) {
+          if (titlu) {
+            student
+              .createProject({ titlu })
+              .then((project) => {
+                res.status(201).send(project);
+              })
+              .catch((error) => {
+                console.log(error);
+                res.status(500).send({ message: "Server error!" });
+              });
+          } else {
+            res.status(400).send({ message: "No title entered!" });
+          }
+        } else {
+          res.status(404).send({ message: "Project not found!" });
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+        res.status(500).send({ message: "Server error!" });
+      });
+  },
+
+  updateProjectToStudent: async (req, res) => {
+    const { titlu } = req.body;
+    const { sid, pid } = req.params;
+    if (!sid) {
+      res.status(400).send({ message: "Student ID not provided" });
+    }
+    if (!pid) {
+      res.status(400).send({ message: "Project ID not provided" });
+    }
+
+    StudentDb.findByPk(sid)
+      .then((student) => {
+        if (student) {
+          ProjectDb.findOne({
+            where: {
+              id: pid,
+              studentId: sid,
+            },
+          }).then((project) => {
+            if (project) {
+              if (titlu) {
+                project.update(req.body);
+                res.status(202).send(project);
+              } else {
+                res.status(400).send({ message: "No name entered!" });
+              }
+            } else {
+              res
+                .status(404)
+                .send({ message: "Partial Deliverable not found!" });
+            }
+          });
+        } else {
+          res.status(404).send({ message: "Project not found!" });
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+        res.status(500).send({ message: "Server error!" });
+      });
+  },
+
+  deleteProjectToStudent: async (req, res) => {
+    const { sid, pid } = req.params;
+    if (!sid) {
+      res.status(400).send({ message: "Student ID not provided" });
+    }
+    if (!pid) {
+      res.status(400).send({ message: "Project ID not provided" });
+    }
+
+    StudentDb.findByPk(sid)
+      .then((student) => {
+        if (student) {
+          ProjectDb.findOne({
+            where: {
+              id: pid,
+              studentId: sid,
+            },
+          }).then((project) => {
+            if (project) {
+              project.destroy();
+              res.status(202).send({ message: "deleted" });
+            } else {
+              res.status(404).send({ message: "Project not found!" });
+            }
+          });
+        } else {
+          res.status(404).send({ message: "Student not found!" });
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+        res.status(500).send({ message: "Server error!" });
+      });
+  },
 };
 
 module.exports = controller;
