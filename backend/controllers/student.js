@@ -68,6 +68,26 @@ const controller = {
       });
   },
 
+  studentLogin: async (req, res) => {
+    StudentDb.findOne({
+      where: {
+        email: req.body.email,
+        parola: req.body.parola,
+      },
+    })
+      .then((student) => {
+        if (student) {
+          res.status(200).send(student);
+        } else {
+          res.status(200).send({ message: "Wrong email/password!" });
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+        res.status(500).send({ message: "Server error!" });
+      });
+  },
+
   updateStudentById: async (req, res) => {
     let errors = [];
     if (

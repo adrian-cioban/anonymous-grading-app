@@ -1,4 +1,5 @@
 const express = require("express");
+const cors = require("cors");
 const connection = require("./models").connection;
 const router = require("./routes");
 
@@ -6,6 +7,8 @@ const app = express();
 
 app.use(express.urlencoded({ extended: true })); // bodyparser integrat in node.js
 app.use(express.json());
+
+app.use(cors());
 
 let port = 8080;
 
