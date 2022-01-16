@@ -6,20 +6,36 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [parola, setParola] = useState("");
 
+  const [rol, setRol] = useState("");
+
   const [loginStatus, setLoginStatus] = useState("");
 
   const login = () => {
-    Axios.post("http://localhost:8080/api/students/login", {
-      email: email,
-      parola: parola,
-    }).then((response) => {
-      if (response.data.message) {
-        setLoginStatus(response.data.message);
-      } else {
-        setLoginStatus("Salut " + response.data.prenume);
-      }
-      console.log(response.data);
-    });
+    if (rol === "student") {
+      Axios.post("http://localhost:8080/api/students/login", {
+        email: email,
+        parola: parola,
+      }).then((response) => {
+        if (response.data.message) {
+          setLoginStatus(response.data.message);
+        } else {
+          setLoginStatus("Salut " + response.data.prenume);
+        }
+        console.log(response.data);
+      });
+    } else if (rol === "teacher") {
+      Axios.post("http://localhost:8080/api/teachers/login", {
+        email: email,
+        parola: parola,
+      }).then((response) => {
+        if (response.data.message) {
+          setLoginStatus(response.data.message);
+        } else {
+          setLoginStatus("Sa traiti " + response.data.prenume);
+        }
+        console.log(response.data);
+      });
+    }
   };
 
   return (
@@ -47,6 +63,21 @@ const Login = () => {
             setParola(e.target.value);
           }}
         />
+      </div>
+      <div>
+        <select
+          name="role"
+          id="role"
+          onChange={(e) => {
+            setRol(e.target.value);
+          }}
+        >
+          <option value="" disabled selected>
+            Selecteaza rol
+          </option>
+          <option value="student">Student</option>
+          <option value="teacher">Teacher</option>
+        </select>
       </div>
       <div className="btn">
         <button onClick={login}>Login</button>

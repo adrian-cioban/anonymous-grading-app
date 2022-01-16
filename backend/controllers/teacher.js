@@ -68,6 +68,26 @@ const controller = {
       });
   },
 
+  teacherLogin: async (req, res) => {
+    TeacherDb.findOne({
+      where: {
+        email: req.body.email,
+        parola: req.body.parola,
+      },
+    })
+      .then((teacher) => {
+        if (teacher) {
+          res.status(200).send(teacher);
+        } else {
+          res.status(200).send({ message: "Wrong email/password!" });
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+        res.status(500).send({ message: "Server error!" });
+      });
+  },
+
   updateTeacherById: async (req, res) => {
     let errors = [];
     if (

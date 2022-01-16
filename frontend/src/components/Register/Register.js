@@ -8,19 +8,36 @@ const Register = () => {
   const [emailReg, setEmailReg] = useState("");
   const [parolaReg, setParolaReg] = useState("");
 
+  const [rol, setRol] = useState("");
+
   const register = () => {
-    Axios.post("http://localhost:8080/api/students", {
-      nume: numeReg,
-      prenume: prenumeReg,
-      email: emailReg,
-      parola: parolaReg,
-    }).then((response) => {
-      console.log(response.data);
-      setNumeReg("");
-      setPrenumeReg("");
-      setEmailReg("");
-      setParolaReg("");
-    });
+    if (rol === "student") {
+      Axios.post("http://localhost:8080/api/students", {
+        nume: numeReg,
+        prenume: prenumeReg,
+        email: emailReg,
+        parola: parolaReg,
+      }).then((response) => {
+        console.log(response.data);
+        setNumeReg("");
+        setPrenumeReg("");
+        setEmailReg("");
+        setParolaReg("");
+      });
+    } else if (rol === "teacher") {
+      Axios.post("http://localhost:8080/api/teachers", {
+        nume: numeReg,
+        prenume: prenumeReg,
+        email: emailReg,
+        parola: parolaReg,
+      }).then((response) => {
+        console.log(response.data);
+        setNumeReg("");
+        setPrenumeReg("");
+        setEmailReg("");
+        setParolaReg("");
+      });
+    }
   };
 
   return (
@@ -72,6 +89,21 @@ const Register = () => {
             setParolaReg(e.target.value);
           }}
         />
+        <div>
+          <select
+            name="role"
+            id="role"
+            onChange={(e) => {
+              setRol(e.target.value);
+            }}
+          >
+            <option value="" disabled selected>
+              Selecteaza rol
+            </option>
+            <option value="student">Student</option>
+            <option value="teacher">Teacher</option>
+          </select>
+        </div>
       </div>
       <div className="btn">
         <button onClick={register}>Register</button>
