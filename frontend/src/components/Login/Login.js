@@ -1,6 +1,11 @@
 import React, { useState } from "react";
 import Axios from "axios";
 import "./Login.css";
+import { useSelector, useDispatch, shallowEqual } from "react-redux";
+import { saveUser } from "../../actions/actions";
+import { useNavigate } from "react-router";
+
+const userSelector = (state) => state.user.user;
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -9,6 +14,11 @@ const Login = () => {
   const [rol, setRol] = useState("");
 
   const [loginStatus, setLoginStatus] = useState("");
+
+  const user = useSelector(userSelector, shallowEqual);
+  const dispatch = useDispatch();
+
+  const navigate = useNavigate();
 
   const login = () => {
     if (rol === "student") {
@@ -19,7 +29,15 @@ const Login = () => {
         if (response.data.message) {
           setLoginStatus(response.data.message);
         } else {
-          setLoginStatus("Salut " + response.data.prenume);
+          const utilizator = {
+            type: "student",
+            id: response.data.id,
+            nume: response.data.nume,
+            prenume: response.data.prenume,
+            email: response.data.email,
+          };
+          dispatch(saveUser(utilizator));
+          navigate("/homepage");
         }
         console.log(response.data);
       });
@@ -31,7 +49,15 @@ const Login = () => {
         if (response.data.message) {
           setLoginStatus(response.data.message);
         } else {
-          setLoginStatus("Sa traiti " + response.data.prenume);
+          const utilizator = {
+            type: "teacher",
+            id: response.data.id,
+            nume: response.data.nume,
+            prenume: response.data.prenume,
+            email: response.data.email,
+          };
+          dispatch(saveUser(utilizator));
+          navigate("/homepage");
         }
         console.log(response.data);
       });
@@ -72,9 +98,7 @@ const Login = () => {
             setRol(e.target.value);
           }}
         >
-          <option value="" disabled selected>
-            Selecteaza rol
-          </option>
+          <option value="">Selecteaza rol</option>
           <option value="student">Student</option>
           <option value="teacher">Teacher</option>
         </select>
@@ -82,7 +106,7 @@ const Login = () => {
       <div className="btn">
         <button onClick={login}>Login</button>
       </div>
-      <h1>{loginStatus}</h1>
+      <h3>{loginStatus}</h3>
     </div>
   );
 };

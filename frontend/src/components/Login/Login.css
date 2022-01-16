@@ -6,6 +6,7 @@
   border-radius: 11px;
   padding: 40px 50px;
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  text-align: center;
 }
 /* top-header */
 .top-header h3 {

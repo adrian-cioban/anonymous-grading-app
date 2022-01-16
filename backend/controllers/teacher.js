@@ -79,7 +79,7 @@ const controller = {
         if (teacher) {
           res.status(200).send(teacher);
         } else {
-          res.status(200).send({ message: "Wrong email/password!" });
+          res.status(200).send({ message: "user does not exist!" });
         }
       })
       .catch((error) => {

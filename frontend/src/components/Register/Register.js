@@ -1,6 +1,11 @@
 import React, { useState } from "react";
 import Axios from "axios";
 import "./Register.css";
+import { useSelector, useDispatch, shallowEqual } from "react-redux";
+import { saveUser } from "../../actions/actions";
+import { useNavigate } from "react-router";
+
+const userSelector = (state) => state.user.user;
 
 const Register = () => {
   const [numeReg, setNumeReg] = useState("");
@@ -9,6 +14,11 @@ const Register = () => {
   const [parolaReg, setParolaReg] = useState("");
 
   const [rol, setRol] = useState("");
+
+  const user = useSelector(userSelector, shallowEqual);
+  const dispatch = useDispatch();
+
+  const navigate = useNavigate();
 
   const register = () => {
     if (rol === "student") {
@@ -23,6 +33,15 @@ const Register = () => {
         setPrenumeReg("");
         setEmailReg("");
         setParolaReg("");
+        const utilizator = {
+          type: "student",
+          id: response.data.id,
+          nume: response.data.nume,
+          prenume: response.data.prenume,
+          email: response.data.email,
+        };
+        dispatch(saveUser(utilizator));
+        navigate("/homepage");
       });
     } else if (rol === "teacher") {
       Axios.post("http://localhost:8080/api/teachers", {
@@ -36,6 +55,15 @@ const Register = () => {
         setPrenumeReg("");
         setEmailReg("");
         setParolaReg("");
+        const utilizator = {
+          type: "teacher",
+          id: response.data.id,
+          nume: response.data.nume,
+          prenume: response.data.prenume,
+          email: response.data.email,
+        };
+        dispatch(saveUser(utilizator));
+        navigate("/homepage");
       });
     }
   };
@@ -97,9 +125,7 @@ const Register = () => {
               setRol(e.target.value);
             }}
           >
-            <option value="" disabled selected>
-              Selecteaza rol
-            </option>
+            <option value="">Selecteaza rol</option>
             <option value="student">Student</option>
             <option value="teacher">Teacher</option>
           </select>
