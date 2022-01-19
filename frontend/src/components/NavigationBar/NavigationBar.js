@@ -4,6 +4,7 @@ import "./NavigationBar.css";
 import { useSelector, useDispatch, shallowEqual } from "react-redux";
 import { saveUser } from "../../actions/actions";
 
+
 const userSelector = (state) => state.user.user;
 
 const NavigationBar = () => {
@@ -46,9 +47,33 @@ const NavigationBar = () => {
           </button>
         </li>
         {isStudent ? (
-          <li>
+          <><><li>
             <button id="myprojects">Proiectele mele</button>
-          </li>
+          </li><li>
+              <button id="addnote"
+                onClick={() => {
+                  navigate("/AdaugaNote");
+                } }
+              >Adauga Note</button>
+            </li>
+          </><li>
+            {/* <select id="optLivr" onchange="myFunction()">
+              <option value="Adauga" name="Adauga" >
+                Adauga
+              </option>
+              <option value="Editeaza" name="Editeaza">
+                Editeaza
+              </option>
+            </select> */}
+            
+              <button id="LivrabilePartiale"
+                onClick={() => {
+                  navigate("/LivrabilePartiale");
+                } }
+               
+              >LivrabilePartiale</button>
+            </li></>
+            
         ) : (
           <span></span>
         )}
@@ -112,6 +137,12 @@ const NavigationBar = () => {
       </ul>
     </div>
   );
+  function myFunction() {
+    var x = document.getElementById("optLivr").value;
+    if(x.toString()==="Adauga")
+    navigate("/AdaugaNote");
+  }
 };
 
 export default NavigationBar;
+

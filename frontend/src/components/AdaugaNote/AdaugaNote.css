@@ -1,0 +1,11 @@
+.containerAdaugaNote {
+    width: 80%;
+    height: 250px;
+    background-color: #fff;
+    margin: 80px auto;
+    border-radius: 11px;
+    padding: 40px 50px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    padding: 70px;
+    color: #495d76;
+  }
