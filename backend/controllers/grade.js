@@ -22,15 +22,19 @@ const controller = {
       .then((project) => {
         if (project) {
           if (grade) {
-            project
-              .createGrade({ grade, idStudent })
-              .then((addedGrade) => {
-                res.status(201).send(addedGrade);
-              })
-              .catch((error) => {
-                console.log(error);
-                res.status(500).send({ message: "Server error!" });
-              });
+            if (grade > 0 && grade <= 10) {
+              project
+                .createGrade({ grade, idStudent })
+                .then((addedGrade) => {
+                  res.status(201).send(addedGrade);
+                })
+                .catch((error) => {
+                  console.log(error);
+                  res.status(500).send({ message: "Server error!" });
+                });
+            } else {
+              res.status(400).send({ message: "Invalid grade entered!" });
+            }
           } else {
             res.status(400).send({ message: "No grade entered!" });
           }
