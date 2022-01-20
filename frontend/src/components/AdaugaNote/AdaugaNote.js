@@ -121,6 +121,79 @@ const AdaugaNote = () => {
           console.log(error);
         });
     }
+    setData([]);
+    Axios.get(`http://localhost:8080/api/projects`)
+      .then((result) => {
+        // console.log(result.data);
+        for (let i = 0; i < result.data.length; i++) {
+          let idProiect = result.data[i].id;
+          let titluProiect = result.data[i].titlu;
+          let studentId = result.data[i].studentId;
+          let livrabile = [];
+          if (user.id !== studentId) {
+            Axios.get(
+              `http://localhost:8080/api/projects/${idProiect}/partialDeliverables`
+            )
+              .then((resultLivrabile) => {
+                //   console.log(resultLivrabile.data);
+                for (
+                  let j = 0;
+                  j < resultLivrabile.data.PartialDeliverable.length;
+                  j++
+                ) {
+                  let idLivrabil =
+                    resultLivrabile.data.PartialDeliverable[j].id;
+                  let numeLivrabil =
+                    resultLivrabile.data.PartialDeliverable[j].nume;
+                  let linkLivrabil =
+                    resultLivrabile.data.PartialDeliverable[j].link;
+                  livrabile.push({
+                    idLivrabil: idLivrabil,
+                    numeLivrabil: numeLivrabil,
+                    linkLivrabil: linkLivrabil,
+                  });
+                  setLivrabile((oldLivrabile) => [
+                    ...oldLivrabile,
+                    {
+                      idLivrabil: idLivrabil,
+                      numeLivrabil: numeLivrabil,
+                      linkLivrabil: linkLivrabil,
+                    },
+                  ]);
+                }
+              })
+              .catch((error) => {
+                console.log(error);
+              });
+            Axios.get("http://localhost:8080/api/grades").then((response) => {
+              // console.log(response.data);
+              let notaProiect = 0;
+              let idNota = 0;
+              for (let i = 0; i < response.data.length; i++) {
+                if (response.data[i].idStudent === user.id) {
+                  if (response.data[i].projectId === idProiect) {
+                    notaProiect = response.data[i].grade;
+                    idNota = response.data[i].id;
+                  }
+                }
+              }
+              setData((oldData) => [
+                ...oldData,
+                {
+                  idProiect: idProiect,
+                  titluProiect: titluProiect,
+                  idNota: idNota,
+                  nota: notaProiect,
+                  livrabile: livrabile,
+                },
+              ]);
+            });
+          }
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (
