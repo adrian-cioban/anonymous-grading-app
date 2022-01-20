@@ -1,43 +1,40 @@
 .containerLivrabile {
-    width: 80%;
-    height: 250px;
-    background-color: #fff;
-    margin: 80px auto;
-    border-radius: 11px;
-    padding: 40px 50px;
-    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-    padding: 70px;
-    color: #495d76;
-  }
-  .btn {
-    display: flex;
-    justify-content: center;
-    margin-top: 25px;
-  }
-  .btn button {
-    width: 40%;
-    border: none;
-    height: 35px;
-    background-color: #277ffd;
-    color: #fff;
-    border-radius: 6px;
-    cursor: pointer;
-  }
-  .Link
-  {
-    display: flex;
-    justify-content: center;
-    margin-top: 15px;
-  }
-  .Link input
-  {
-    
-    width: 80%;
-    
-    height: 35px;
-    border-radius: 6px;
-  }
-  ::-webkit-input-placeholder
+  width: 80%;
+  height: 250px;
+  background-color: #fff;
+  margin: 80px auto;
+  border-radius: 11px;
+  padding: 40px 50px;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  padding: 70px;
+  color: #495d76;
+}
+.btn {
+  display: flex;
+  justify-content: center;
+  margin-top: 25px;
+}
+.btn button {
+  width: 40%;
+  border: none;
+  height: 35px;
+  background-color: #277ffd;
+  color: #fff;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.Link {
+  display: flex;
+  justify-content: center;
+  margin-top: 15px;
+}
+.Link input {
+  width: 80%;
+
+  height: 35px;
+  border-radius: 6px;
+}
+/* ::-webkit-input-placeholder
   {
       text-align: center;
-  }
+  } */
