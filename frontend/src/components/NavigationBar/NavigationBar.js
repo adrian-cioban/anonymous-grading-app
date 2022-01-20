@@ -49,7 +49,14 @@ const NavigationBar = () => {
           <>
             <>
               <li>
-                <button id="myprojects">Proiectele mele</button>
+                <button
+                  id="myprojects"
+                  onClick={() => {
+                    navigate("/myProjects");
+                  }}
+                >
+                  Proiectele mele
+                </button>
               </li>
               <li>
                 <button

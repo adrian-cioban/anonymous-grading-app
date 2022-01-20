@@ -11,20 +11,24 @@ const Students = () => {
   useEffect(() => {
     Axios.get("http://localhost:8080/api/projects/")
       .then((resultProjects) => {
+        console.log(resultProjects.data);
         Axios.get("http://localhost:8080/api/students/")
           .then((resultStudents) => {
+            console.log(resultStudents.data);
             for (let i = 0; i < resultProjects.data.length; i++) {
               let idProiect = resultProjects.data[i].id;
               let titluProiect = resultProjects.data[i].titlu;
+              let idProiectStudent = resultProjects.data[i].studentId;
               for (let j = 0; j < resultStudents.data.length; j++) {
                 let idStudent = resultStudents.data[j].id;
-                if (idStudent === idProiect) {
+                if (idStudent === idProiectStudent) {
                   let numeStudent = resultStudents.data[j].nume;
                   let prenumeStudent = resultStudents.data[j].prenume;
                   Axios.get(
                     `http://localhost:8080/api/projects/${idProiect}/finalGrade`
                   )
                     .then((resultGrade) => {
+                      console.log(resultGrade.data);
                       setData((oldData) => [
                         ...oldData,
                         {

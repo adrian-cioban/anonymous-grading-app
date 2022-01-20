@@ -39,7 +39,7 @@ const Login = () => {
           dispatch(saveUser(utilizator));
           navigate("/homepage");
         }
-        console.log(response.data);
+        // console.log(response.data);
       });
     } else if (rol === "teacher") {
       Axios.post("http://localhost:8080/api/teachers/login", {
@@ -59,7 +59,7 @@ const Login = () => {
           dispatch(saveUser(utilizator));
           navigate("/homepage");
         }
-        console.log(response.data);
+        // console.log(response.data);
       });
     }
   };

@@ -8,6 +8,9 @@ import AdaugaNote from "./components/AdaugaNote/AdaugaNote";
 import Livrabile from "./components/Livrabile/Livrabile";
 import Students from "./components/Students/Students";
 import AllGrades from "./components/AllGrades/AllGrades";
+import MyProjects from "./components/MyProjects/MyProjects";
+import AddProject from "./components/MyProjects/AddProject";
+import EditProject from "./components/MyProjects/EditProject";
 
 function App() {
   return (
@@ -26,6 +29,12 @@ function App() {
         <Route
           path="/allGrades/:proiectId"
           element={<AllGrades></AllGrades>}
+        ></Route>
+        <Route path="/myProjects" element={<MyProjects></MyProjects>}></Route>
+        <Route path="/addProject" element={<AddProject></AddProject>}></Route>
+        <Route
+          path="/editProject/:proiectId"
+          element={<EditProject></EditProject>}
         ></Route>
       </Routes>
     </BrowserRouter>
