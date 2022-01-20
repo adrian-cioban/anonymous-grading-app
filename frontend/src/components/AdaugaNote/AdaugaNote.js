@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, shallowEqual } from "react-redux";
 import Axios from "axios";
-import { useNavigate } from "react-router";
 import "./AdaugaNote.css";
 
 const userSelector = (state) => state.user.user;
@@ -9,12 +8,9 @@ const userSelector = (state) => state.user.user;
 const AdaugaNote = () => {
   const [data, setData] = useState([]);
   const [nota, setNota] = useState(0);
-  const [noteBD, setNoteBD] = useState([]);
   const [livrabile, setLivrabile] = useState([]);
 
   const user = useSelector(userSelector, shallowEqual);
-
-  const navigate = useNavigate();
 
   useEffect(() => {
     Axios.get(`http://localhost:8080/api/projects`)

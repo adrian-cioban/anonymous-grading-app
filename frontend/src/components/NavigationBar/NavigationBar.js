@@ -69,25 +69,6 @@ const NavigationBar = () => {
                 </button>
               </li>
             </>
-            {/* <li> */}
-            {/* <select id="optLivr" onchange="myFunction()">
-              <option value="Adauga" name="Adauga" >
-                Adauga
-              </option>
-              <option value="Editeaza" name="Editeaza">
-                Editeaza
-              </option>
-            </select> */}
-
-            {/* <button
-                id="LivrabilePartiale"
-                onClick={() => {
-                  navigate("/LivrabilePartiale");
-                }}
-              >
-                LivrabilePartiale
-              </button>
-            </li> */}
           </>
         ) : (
           <span></span>
@@ -154,10 +135,6 @@ const NavigationBar = () => {
       </ul>
     </div>
   );
-  function myFunction() {
-    var x = document.getElementById("optLivr").value;
-    if (x.toString() === "Adauga") navigate("/AdaugaNote");
-  }
 };
 
 export default NavigationBar;
