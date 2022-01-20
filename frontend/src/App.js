@@ -6,6 +6,8 @@ import Register from "./components/Register/Register";
 import Homepage from "./components/Homepage/Homepage";
 import AdaugaNote from "./components/AdaugaNote/AdaugaNote";
 import Livrabile from "./components/Livrabile/Livrabile";
+import Students from "./components/Students/Students";
+import AllGrades from "./components/AllGrades/AllGrades";
 
 function App() {
   return (
@@ -16,7 +18,15 @@ function App() {
         <Route path="/register" element={<Register></Register>}></Route>
         <Route path="/homepage" element={<Homepage></Homepage>}></Route>
         <Route path="/AdaugaNote" element={<AdaugaNote></AdaugaNote>}></Route>
-        <Route path="/LivrabilePartiale" element={<Livrabile></Livrabile>}></Route>
+        <Route
+          path="/LivrabilePartiale"
+          element={<Livrabile></Livrabile>}
+        ></Route>
+        <Route path="/students" element={<Students></Students>}></Route>
+        <Route
+          path="/allGrades/:proiectId"
+          element={<AllGrades></AllGrades>}
+        ></Route>
       </Routes>
     </BrowserRouter>
   );
