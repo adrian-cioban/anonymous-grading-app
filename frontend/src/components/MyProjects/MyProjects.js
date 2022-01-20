@@ -81,6 +81,10 @@ const MyProjects = () => {
     navigate(`/editProject/${idProiect}`);
   };
 
+  const livrabilePartiale = (idProiect) => {
+    navigate(`/livrabilePartiale/${idProiect}`);
+  };
+
   return (
     <div>
       <div className="containerMyProjects">
@@ -88,6 +92,12 @@ const MyProjects = () => {
           return (
             <div key={item.idProiect} className="divProiect">
               <h1 className="titluLivrabil">{item.titluProiect}</h1>
+              <button
+                className="projectButton"
+                onClick={() => livrabilePartiale(item.idProiect)}
+              >
+                Livrabile partiale
+              </button>
               <button
                 className="projectButton"
                 onClick={() => sterge(item.idProiect)}

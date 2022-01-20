@@ -67,22 +67,23 @@ const controller = {
     PartialDeliverableDb.findByPk(req.params.id)
       .then((partialDeliverable) => {
         if (partialDeliverable) {
-          ProjectDb.findByPk(req.body.projectId).then((project) => {
-            if (project) {
-              if (req.body.nume) {
-                if (req.body.link) {
-                  partialDeliverable.update(req.body);
-                  res.status(202).send(partialDeliverable);
-                } else {
-                  res.status(400).send({ message: "No link entered!" });
-                }
-              } else {
-                res.status(400).send({ message: "No name entered!" });
-              }
+          if (req.body.nume) {
+            if (req.body.link) {
+              partialDeliverable.update(req.body);
+              res.status(202).send(partialDeliverable);
             } else {
-              res.status(404).send({ message: "Project not found!" });
+              res.status(400).send({ message: "No link entered!" });
             }
-          });
+          } else {
+            res.status(400).send({ message: "No name entered!" });
+          }
+          // ProjectDb.findByPk(req.body.projectId).then((project) => {
+          //   if (project) {
+
+          //   } else {
+          //     res.status(404).send({ message: "Project not found!" });
+          //   }
+          // });
         } else {
           res.status(404).send({ message: "Partial Deliverable not found!" });
         }
