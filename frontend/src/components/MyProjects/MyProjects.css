@@ -1,4 +1,4 @@
-.containerAdaugaNote {
+.containerMyProjects {
   width: 80%;
   /* height: 250px; */
   background-color: #fff;
@@ -22,7 +22,7 @@
   margin-bottom: 20px;
 }
 
-.addNotaButton {
+.projectButton {
   float: right;
   padding: 10px;
   border: none;
@@ -34,19 +34,7 @@
   margin: 5px;
 }
 
-.inputNota {
-  float: right;
-  height: 35px;
-  border: none;
-  border: 1px solid #e6e6e6;
-  border-radius: 6px;
-  outline: none;
-  padding: 10px 10px;
-  margin: 5px;
-}
-
-.hiddenButton button {
-  visibility: hidden;
+.addProjectButton button {
   width: 100%;
   border: none;
   height: 35px;

@@ -49,7 +49,14 @@ const NavigationBar = () => {
           <>
             <>
               <li>
-                <button id="myprojects">Proiectele mele</button>
+                <button
+                  id="myprojects"
+                  onClick={() => {
+                    navigate("/myProjects");
+                  }}
+                >
+                  Proiectele mele
+                </button>
               </li>
               <li>
                 <button
@@ -62,8 +69,8 @@ const NavigationBar = () => {
                 </button>
               </li>
             </>
-            <li>
-              {/* <select id="optLivr" onchange="myFunction()">
+            {/* <li> */}
+            {/* <select id="optLivr" onchange="myFunction()">
               <option value="Adauga" name="Adauga" >
                 Adauga
               </option>
@@ -72,7 +79,7 @@ const NavigationBar = () => {
               </option>
             </select> */}
 
-              <button
+            {/* <button
                 id="LivrabilePartiale"
                 onClick={() => {
                   navigate("/LivrabilePartiale");
@@ -80,7 +87,7 @@ const NavigationBar = () => {
               >
                 LivrabilePartiale
               </button>
-            </li>
+            </li> */}
           </>
         ) : (
           <span></span>
